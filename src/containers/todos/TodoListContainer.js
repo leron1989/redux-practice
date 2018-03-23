@@ -1,10 +1,22 @@
 import TodoList from '../../components/todos/TodoList';
-import {toggleTodo} from '../../actions/todos';
+import {toggleTodo, Filters} from '../../actions/todos';
 import {connect} from 'react-redux';
 
+const getFilterTodos = (filter, todos) => {
+  switch(filter){
+    case Filters.ACTIVE:
+      return todos.filter((todo) => todo.active);
+    case Filters.COMPLETED:
+      return todos.filter((todo) => !todo.active)
+    default:
+      return todos;
+  }
+}
+
 const mapStateProps = (state) => {
+  // console.log("mapstateprops", state)
   return {
-    todos: state.todos
+    todos: getFilterTodos(state.filter, state.todos)
   }
 }
 

@@ -26,7 +26,7 @@ class FooterFilter extends React.Component{
           onClick={this.handleFilterTodos.bind(this, Filters.SHOW_ALL)}>
           all
         </Filter>
-        <Filter active={this.props.filter === Filters.SHOW_ALL?true:false} 
+        <Filter active={this.props.filter === Filters.ACTIVE?true:false} 
           onClick={this.handleFilterTodos.bind(this, Filters.ACTIVE)}>
           active
         </Filter>
@@ -45,10 +45,11 @@ const mapStateProps = (state) => {
   }
 }
 
-const mapDispatchProps = (dispatch, ownerProps) => {
-  console.log(ownerProps)
+const mapDispatchProps = (dispatch, ownProps) => {
   return {
-    onFilterTodos: (filter) => dispatch(setFilter(filter))
+    onFilterTodos: (filter) => {
+      dispatch(setFilter(filter))
+    }
   }
 }
 
